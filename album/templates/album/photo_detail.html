@@ -1,0 +1,32 @@
+{% extends 'album/base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <p><a href="{{ request.META.HTTP_REFERER }}">« 戻る</a></p>
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ photo.image.url }}" class="img-fluid">
+          <p class="m-3 text-end">{{ photo.created_at }}</p>
+          <p class="fs-5">
+            {% for tag in photo.tags.all %}
+            <span class="badge rounded-pill bg-light text-dark">
+              {{ tag }}
+            </span>
+            {% endfor %}
+          </p>
+          <hr>
+          <p>{{ photo.description }}</p>
+          <p>
+            <a href="{% url 'photo-update' photo.pk %}">編集する »</a>
+          </p>
+          <p>
+            <a href="{% url 'photo-delete' photo.pk %}">削除する »</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
